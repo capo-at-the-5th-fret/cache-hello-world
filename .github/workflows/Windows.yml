@@ -16,10 +16,10 @@ jobs:
 
     # - name: Setup MSVC
     #   uses: ilammy/msvc-dev-cmd@v1
-    # - name: Ccache
-    #   uses: hendrikmuhs/ccache-action@v1.2.4
-    #   with:
-    #     key: v2-${{ runner.os }}-${{ github.ref }}
+    - name: Ccache
+      uses: hendrikmuhs/ccache-action@v1.2.4
+      with:
+        key: v2-${{ runner.os }}-${{ github.ref }}
     - name: print ccache and ninja
       shell: bash
       run: |

@@ -32,7 +32,7 @@ jobs:
         echo "=============="
         ninja --version
     - name: Configure and Build
-      shell: bash
+      #shell: bash
       run: |
         mkdir build
         cd build

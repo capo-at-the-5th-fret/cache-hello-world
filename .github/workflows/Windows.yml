@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: update things
-      run: choco install ccache ninja
+      run: choco install ccache
 
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
@@ -31,5 +31,5 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
+        cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
         ninja

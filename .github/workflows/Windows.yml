@@ -22,7 +22,7 @@ jobs:
     #     key: v2-${{ runner.os }}-${{ github.ref }}
 
     - name: sccache
-      if: matrix.config.ccache_variant == 'sccache'
+      #if: matrix.config.ccache_variant == 'sccache'
       uses: mozilla-actions/sccache-action@v0.0.3
 
     - name: print ccache and ninja

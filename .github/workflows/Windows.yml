@@ -11,19 +11,24 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: update things
-      run: choco install ccache
+    # - name: update things
+    #   run: choco install ccache
 
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
-    - name: Ccache
-      uses: hendrikmuhs/ccache-action@v1.2.4
-      with:
-        key: v2-${{ runner.os }}-${{ github.ref }}
+    # - name: Ccache
+    #   uses: hendrikmuhs/ccache-action@v1.2.4
+    #   with:
+    #     key: v2-${{ runner.os }}-${{ github.ref }}
+
+    - name: sccache
+      if: matrix.config.ccache_variant == 'sccache'
+      uses: mozilla-actions/sccache-action@v0.0.3
+
     - name: print ccache and ninja
       shell: bash
       run: |
-        ccache --version
+        sccache --version
         echo "=============="
         ninja --version
     - name: Configure and Build
@@ -31,5 +36,5 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache ..
+        cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache ..
         ninja

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(Foo)
+project(Foo LANGUAGES CXX)
 
 ### Build settings
 set(CMAKE_CXX_STANDARD 11)

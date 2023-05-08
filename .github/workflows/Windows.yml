@@ -11,6 +11,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: update things
+      run: choco install ccache ninja
+
     # - name: Setup MSVC
     #   uses: ilammy/msvc-dev-cmd@v1
     # - name: Ccache

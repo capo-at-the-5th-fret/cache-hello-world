@@ -1,0 +1,30 @@
+name: Windows
+
+on: [push, pull_request]
+
+jobs:
+  windows_build:
+    name: Build (Windows)
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Ccache
+      uses: hendrikmuhs/ccache-action@v1.2.4
+      with:
+        key: v2-${{ runner.os }}-${{ github.ref }}
+    - name: print ccache and ninja
+      shell: bash
+      run: |
+        ccache --version
+        echo "=============="
+        ninja --version
+    - name: Configure and Build
+      shell: bash
+      run: |
+        mkdir build
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=Release -GNinja -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
+        ninja
